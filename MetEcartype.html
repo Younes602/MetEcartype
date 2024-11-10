@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcul de la moyenne et de l'écart-type</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calcul de la moyenne et de l'écart-type <br/> recensement général de la population et de l’habitat au maroc</h1>
+    <p>Entrez des nombres (séparés par des virgules) :</p>
+    <input type="text" id="dataInput" placeholder="Exemple : 1, 2, 3, 4, 5">
+    <button onclick="calculate()">Calculer</button>
+    
+    <h2>Résultats :</h2>
+    <p>Moyenne : <span id="mean"></span></p>
+    <p>Écart-type : <span id="stdDev"></span></p>
+
+    <script>
+        function calculate() {
+            // Récupérer la valeur entrée par l'utilisateur et la convertir en tableau de nombres
+            const input = document.getElementById('dataInput').value;
+            const data = input.split(',').map(Number);
+            
+            // Calcul de la moyenne
+            const mean = data.reduce((acc, val) => acc + val, 0) / data.length;
+            document.getElementById('mean').textContent = mean.toFixed(2);
+
+            // Calcul de l'écart-type
+            const variance = data.reduce((acc, val) => acc + Math.pow(val - mean, 2), 0) / data.length;
+            const stdDev = Math.sqrt(variance);
+            document.getElementById('stdDev').textContent = stdDev.toFixed(2);
+        }
+    </script>
+</body>
+</html>
